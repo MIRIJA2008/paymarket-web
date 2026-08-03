@@ -11,7 +11,6 @@ import {
   Bell,
   ShieldCheck,
   Calendar,
-  Activity,
   ArrowUpRight,
   TrendingUp,
   Target,

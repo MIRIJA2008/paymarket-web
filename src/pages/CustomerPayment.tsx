@@ -1,7 +1,7 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { QRScanner } from '../components/customer/QRScanner';
-import { CreditCard, Smartphone, CheckCircle, ArrowLeft, ShieldCheck, HelpCircle, Info } from 'lucide-react';
+import { Smartphone, CheckCircle, ArrowLeft, ShieldCheck } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 interface MerchantData {
@@ -40,7 +40,7 @@ export const CustomerPayment = () => {
     setTimeout(() => {
       setLoading(false);
       setPaymentSuccess(true);
-      toast.success('Paiement effectué avec succès !');
+      toast.success('Paiement effectuÃ© avec succÃ¨s !');
       
       setTimeout(() => {
         setPaymentSuccess(false);
@@ -50,7 +50,7 @@ export const CustomerPayment = () => {
     }, 2000);
   };
 
-  // 1. ÉCRAN DE SUCCÈS (REDESIGN NÉON SUNSET)
+  // 1. Ã‰CRAN DE SUCCÃˆS (REDESIGN NÃ‰ON SUNSET)
   if (paymentSuccess) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#0f0a1a] text-slate-100 p-4 font-sans antialiased">
@@ -61,17 +61,17 @@ export const CustomerPayment = () => {
             <CheckCircle size={44} className="text-[#ff6ef7] drop-shadow-[0_0_8px_#ff6ef7]" />
           </div>
           
-          <h2 className="text-2xl font-black text-white tracking-tight mb-2">Paiement réussi !</h2>
+          <h2 className="text-2xl font-black text-white tracking-tight mb-2">Paiement rÃ©ussi !</h2>
           <p className="text-3xl font-black bg-gradient-to-r from-[#6366f1] via-[#ec4899] to-[#ff6ef7] bg-clip-text text-transparent mb-5 tracking-tight">
             {parseFloat(paymentAmount).toLocaleString()} Ar
           </p>
           
           <div className="bg-[#0f0a1a]/80 border border-[#4c1d95]/40 rounded-xl p-3 text-sm text-slate-300 mb-2">
-            <span className="text-[#8b5cf6] block text-[10px] uppercase font-bold tracking-widest mb-1">Marchand certifié</span>
+            <span className="text-[#8b5cf6] block text-[10px] uppercase font-bold tracking-widest mb-1">Marchand certifiÃ©</span>
             <span className="font-semibold text-white">{merchant?.merchantName}</span>
           </div>
           <p className="text-[11px] text-slate-500 mt-4 flex items-center justify-center gap-1">
-            <ShieldCheck size={12} className="text-[#6366f1]" /> Reçu sécurisé envoyé par SMS
+            <ShieldCheck size={12} className="text-[#6366f1]" /> ReÃ§u sÃ©curisÃ© envoyÃ© par SMS
           </p>
         </div>
       </div>
@@ -82,7 +82,7 @@ export const CustomerPayment = () => {
     return <QRScanner onScanSuccess={handleScanSuccess} onClose={() => setShowScanner(false)} />;
   }
 
-  // 2. ÉCRAN PRINCIPAL (REDESIGN NÉON SUNSET)
+  // 2. Ã‰CRAN PRINCIPAL (REDESIGN NÃ‰ON SUNSET)
   return (
     <div className="min-h-screen bg-[#0f0a1a] text-slate-100 font-sans antialiased">
       {/* Header collant */}
@@ -122,14 +122,14 @@ export const CustomerPayment = () => {
           /* FORMULAIRE DE PAIEMENT */
           <div className="bg-[#1a142e]/70 backdrop-blur-sm rounded-2xl border border-[#4c1d95]/40 p-6 shadow-xl">
             <div className="border-b border-[#4c1d95]/20 pb-3 mb-5 flex justify-between items-center">
-              <h2 className="text-xs font-bold text-[#8b5cf6] tracking-widest uppercase">Vérification de facture</h2>
+              <h2 className="text-xs font-bold text-[#8b5cf6] tracking-widest uppercase">VÃ©rification de facture</h2>
               <span className="text-[10px] bg-[#6366f1]/10 text-[#6366f1] border border-[#6366f1]/20 px-2 py-0.5 rounded-md font-mono">ID: {merchant.merchantId}</span>
             </div>
             
-            {/* Infos Commerçant */}
+            {/* Infos CommerÃ§ant */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
               <div className="bg-[#0f0a1a]/80 border border-[#4c1d95]/30 rounded-xl p-3.5">
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Bénéficiaire</p>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">BÃ©nÃ©ficiaire</p>
                 <p className="font-extrabold text-white text-base mt-0.5">{merchant.merchantName}</p>
               </div>
               
@@ -139,7 +139,7 @@ export const CustomerPayment = () => {
               </div>
             </div>
             
-            {/* Input Montant Néon */}
+            {/* Input Montant NÃ©on */}
             <div className="mb-5 relative">
               <label className="block text-[10px] font-bold text-[#8b5cf6] uppercase tracking-widest mb-2">Montant du transfert (Ar)</label>
               <div className="relative">
@@ -155,9 +155,9 @@ export const CustomerPayment = () => {
               </div>
             </div>
             
-            {/* Sélection de l'opérateur mobile */}
+            {/* SÃ©lection de l'opÃ©rateur mobile */}
             <div className="mb-6">
-              <label className="block text-[10px] font-bold text-[#8b5cf6] uppercase tracking-widest mb-2">Canal de débit</label>
+              <label className="block text-[10px] font-bold text-[#8b5cf6] uppercase tracking-widest mb-2">Canal de dÃ©bit</label>
               <div className="grid grid-cols-3 gap-2">
                 {/* MVOLA */}
                 <button
@@ -203,14 +203,14 @@ export const CustomerPayment = () => {
               </div>
             </div>
 
-            {/* Contenu ajouté : Recap des frais de transaction */}
+            {/* Contenu ajoutÃ© : Recap des frais de transaction */}
             <div className="mb-6 bg-[#0f0a1a]/50 border border-[#4c1d95]/20 rounded-xl p-3 space-y-1.5 text-xs text-slate-400">
               <div className="flex justify-between">
                 <span>Frais PayMarket</span>
                 <span className="text-[#ff6ef7] font-bold">0 Ar (Gratuit)</span>
               </div>
               <div className="flex justify-between border-t border-[#4c1d95]/20 pt-1.5 text-slate-300 font-medium">
-                <span>Total à débiter</span>
+                <span>Total Ã  dÃ©biter</span>
                 <span className="font-mono">{paymentAmount ? `${parseFloat(paymentAmount).toLocaleString()} Ar` : '0 Ar'}</span>
               </div>
             </div>
@@ -235,7 +235,7 @@ export const CustomerPayment = () => {
               onClick={() => setMerchant(null)}
               className="w-full mt-3 text-slate-500 hover:text-[#ff6ef7] text-xs font-semibold tracking-wide transition-colors py-2"
             >
-              Annuler et réinitialiser
+              Annuler et rÃ©initialiser
             </button>
           </div>
         )}

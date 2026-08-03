@@ -1,4 +1,4 @@
-import React from 'react'; // Requis selon ta configuration TypeScript/Babel
+﻿import React from 'react'; // Requis selon ta configuration TypeScript/Babel
 import toast from 'react-hot-toast';
 import { CheckCircle2, AlertOctagon, Info, AlertTriangle } from 'lucide-react';
 
@@ -116,34 +116,34 @@ export class NotificationService {
 
   static notifyNewPayment(merchantName: string, amount: number, customerName: string) {
     this.showToast({
-      title: 'Paiement Encaissé',
-      message: `${customerName} a versé ${amount.toLocaleString()} Ar sur la passerelle ${merchantName}.`,
+      title: 'Paiement EncaissÃ©',
+      message: `${customerName} a versÃ© ${amount.toLocaleString()} Ar sur la passerelle ${merchantName}.`,
       type: 'success',
       duration: 5000
     });
 
     this.showDesktopNotification(
-      '💰 Nouveau paiement reçu !',
-      `${customerName} • ${amount.toLocaleString()} Ar`
+      'ðŸ’° Nouveau paiement reÃ§u !',
+      `${customerName} â€¢ ${amount.toLocaleString()} Ar`
     );
   }
 
   static notifyDailyReport(merchantName: string, totalAmount: number, transactionCount: number) {
     this.showToast({
-      title: 'Synthèse du Jour',
-      message: `${merchantName} : Clôture à ${totalAmount.toLocaleString()} Ar pour ${transactionCount} opérations.`,
+      title: 'SynthÃ¨se du Jour',
+      message: `${merchantName} : ClÃ´ture Ã  ${totalAmount.toLocaleString()} Ar pour ${transactionCount} opÃ©rations.`,
       type: 'info',
       duration: 7000
     });
   }
 
   static async sendSMS(phoneNumber: string, message: string): Promise<boolean> {
-    console.log(`[SMS] À ${phoneNumber}: ${message}`);
+    console.log(`[SMS] Ã€ ${phoneNumber}: ${message}`);
     return new Promise((resolve) => {
       setTimeout(() => {
         this.showToast({
           title: 'Passerelle SMS',
-          message: `Routage SMS complété vers le numéro ${phoneNumber}`,
+          message: `Routage SMS complÃ©tÃ© vers le numÃ©ro ${phoneNumber}`,
           type: 'success',
           duration: 2000
         });
@@ -152,13 +152,13 @@ export class NotificationService {
     });
   }
 
-  static async sendEmail(email: string, subject: string, body: string): Promise<boolean> {
-    console.log(`[EMAIL] À ${email}: ${subject}`);
+  static async sendEmail(email: string, subject: string, _body: string): Promise<boolean> {
+    console.log(`[EMAIL] Ã€ ${email}: ${subject}`);
     return new Promise((resolve) => {
       setTimeout(() => {
         this.showToast({
           title: 'Flux SMTP',
-          message: `Bordereau comptable envoyé avec succès à ${email}`,
+          message: `Bordereau comptable envoyÃ© avec succÃ¨s Ã  ${email}`,
           type: 'success',
           duration: 2000
         });
@@ -169,7 +169,7 @@ export class NotificationService {
 
   static sendTestNotification() {
     this.showToast({
-      title: 'Test Système',
+      title: 'Test SystÃ¨me',
       message: 'Les passerelles de notifications de la console fonctionnent !',
       type: 'success'
     });

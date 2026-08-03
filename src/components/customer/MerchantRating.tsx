@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Star, StarHalf, ThumbsUp, MessageCircle } from 'lucide-react';
+﻿import { useState } from 'react';
+import { Star, ThumbsUp } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 interface MerchantRatingProps {
@@ -8,7 +8,7 @@ interface MerchantRatingProps {
   onRated?: () => void;
 }
 
-export const MerchantRating = ({ merchantId, merchantName, onRated }: MerchantRatingProps) => {
+export const MerchantRating = ({ merchantId: _merchantId, merchantName, onRated }: MerchantRatingProps) => {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [comment, setComment] = useState('');
@@ -23,7 +23,7 @@ export const MerchantRating = ({ merchantId, merchantName, onRated }: MerchantRa
     // Simulation d'envoi
     setTimeout(() => {
       setSubmitted(true);
-      toast.success('Merci pour votre évaluation !');
+      toast.success('Merci pour votre Ã©valuation !');
       if (onRated) onRated();
     }, 500);
   };
@@ -35,7 +35,7 @@ export const MerchantRating = ({ merchantId, merchantName, onRated }: MerchantRa
           <ThumbsUp size={32} className="text-green-600" />
         </div>
         <h3 className="text-xl font-bold text-gray-800 mb-2">Merci !</h3>
-        <p className="text-gray-600">Votre avis a été enregistré</p>
+        <p className="text-gray-600">Votre avis a Ã©tÃ© enregistrÃ©</p>
       </div>
     );
   }
@@ -44,10 +44,10 @@ export const MerchantRating = ({ merchantId, merchantName, onRated }: MerchantRa
     <div className="space-y-4">
       <div className="text-center">
         <h3 className="text-lg font-semibold text-gray-800">{merchantName}</h3>
-        <p className="text-sm text-gray-500">Comment évaluez-vous ce commerçant ?</p>
+        <p className="text-sm text-gray-500">Comment Ã©valuez-vous ce commerÃ§ant ?</p>
       </div>
 
-      {/* Étoiles */}
+      {/* Ã‰toiles */}
       <div className="flex justify-center gap-2">
         {[1, 2, 3, 4, 5].map((star) => {
           const isActive = (hoverRating || rating) >= star;
@@ -77,7 +77,7 @@ export const MerchantRating = ({ merchantId, merchantName, onRated }: MerchantRa
         <textarea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          placeholder="Partagez votre expérience..."
+          placeholder="Partagez votre expÃ©rience..."
           rows={3}
           className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
         />
@@ -88,7 +88,7 @@ export const MerchantRating = ({ merchantId, merchantName, onRated }: MerchantRa
         onClick={handleSubmit}
         className="w-full bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700 transition"
       >
-        Envoyer l'évaluation
+        Envoyer l'Ã©valuation
       </button>
     </div>
   );

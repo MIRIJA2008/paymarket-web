@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Clock, CheckCircle, XCircle, Download, Eye, Calendar, CreditCard } from 'lucide-react';
+﻿import { useState, useEffect } from 'react';
+import { Clock, CheckCircle, XCircle, Download, Calendar, CreditCard } from 'lucide-react';
 import { CustomerService, PaymentHistory as PaymentHistoryType } from '../../services/customer.service';
 import toast from 'react-hot-toast';
 import { format } from 'date-fns';
@@ -13,7 +13,6 @@ export const PaymentHistory = ({ customerId }: PaymentHistoryProps) => {
   const [history, setHistory] = useState<PaymentHistoryType[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'success' | 'failed'>('all');
-  const [selectedReceipt, setSelectedReceipt] = useState<PaymentHistoryType | null>(null);
 
   useEffect(() => {
     loadHistory();
@@ -33,19 +32,29 @@ export const PaymentHistory = ({ customerId }: PaymentHistoryProps) => {
 
   const handleDownloadReceipt = async (transaction: PaymentHistoryType) => {
     try {
-      toast.loading('Génération du reçu...');
-      const receipt = await CustomerService.downloadReceipt(transaction.id);
+      toast.loading('GÃ©nÃ©ration du reÃ§u...');
+      const receipt = await CustomerService.downloadReceipt({
+        id: transaction.id,
+        merchantName: transaction.merchantName,
+        amount: transaction.amount,
+        networkFees: 0,
+        totalDebited: transaction.amount,
+        date: transaction.date,
+        paymentMethod: transaction.paymentMethod,
+        transactionId: transaction.id,
+        status: transaction.status as 'success' | 'pending' | 'failed',
+      });
       const url = URL.createObjectURL(receipt);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `reçu_${transaction.id}.html`;
+      a.download = `reÃ§u_${transaction.id}.html`;
       a.click();
       URL.revokeObjectURL(url);
       toast.dismiss();
-      toast.success('Reçu téléchargé avec succès');
+      toast.success('ReÃ§u tÃ©lÃ©chargÃ© avec succÃ¨s');
     } catch (error) {
       toast.dismiss();
-      toast.error('Erreur lors du téléchargement');
+      toast.error('Erreur lors du tÃ©lÃ©chargement');
     }
   };
 
@@ -63,9 +72,9 @@ export const PaymentHistory = ({ customerId }: PaymentHistoryProps) => {
   const getStatusText = (status: string) => {
     switch (status) {
       case 'success':
-        return 'Réussi';
+        return 'RÃ©ussi';
       case 'failed':
-        return 'Échoué';
+        return 'Ã‰chouÃ©';
       default:
         return 'En attente';
     }
@@ -92,7 +101,7 @@ export const PaymentHistory = ({ customerId }: PaymentHistoryProps) => {
       {/* Statistiques */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-6 text-white">
-          <p className="text-sm opacity-90">Total dépensé</p>
+          <p className="text-sm opacity-90">Total dÃ©pensÃ©</p>
           <p className="text-3xl font-bold mt-2">{totalSpent.toLocaleString()} Ar</p>
           <p className="text-xs mt-2 opacity-75">sur {filteredHistory.filter(h => h.status === 'success').length} transactions</p>
         </div>
@@ -103,7 +112,7 @@ export const PaymentHistory = ({ customerId }: PaymentHistoryProps) => {
               <CheckCircle size={24} className="text-green-600" />
             </div>
             <div>
-              <p className="text-gray-500 text-sm">Transactions réussies</p>
+              <p className="text-gray-500 text-sm">Transactions rÃ©ussies</p>
               <p className="text-2xl font-bold text-gray-800">
                 {history.filter(h => h.status === 'success').length}
               </p>
@@ -146,7 +155,7 @@ export const PaymentHistory = ({ customerId }: PaymentHistoryProps) => {
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
-          Réussies
+          RÃ©ussies
         </button>
         <button
           onClick={() => setFilter('failed')}
@@ -156,7 +165,7 @@ export const PaymentHistory = ({ customerId }: PaymentHistoryProps) => {
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
-          Échouées
+          Ã‰chouÃ©es
         </button>
       </div>
 
@@ -165,7 +174,7 @@ export const PaymentHistory = ({ customerId }: PaymentHistoryProps) => {
         <div className="divide-y">
           {filteredHistory.length === 0 ? (
             <div className="text-center py-12 text-gray-500">
-              Aucune transaction trouvée
+              Aucune transaction trouvÃ©e
             </div>
           ) : (
             filteredHistory.map((transaction) => (
@@ -184,9 +193,9 @@ export const PaymentHistory = ({ customerId }: PaymentHistoryProps) => {
                     <h3 className="font-semibold text-gray-800">{transaction.merchantName}</h3>
                     <div className="flex items-center gap-4 mt-1 text-sm text-gray-500">
                       <span>{transaction.amount.toLocaleString()} Ar</span>
-                      <span>•</span>
+                      <span>â€¢</span>
                       <span>{transaction.paymentMethod}</span>
-                      <span>•</span>
+                      <span>â€¢</span>
                       <div className="flex items-center gap-1">
                         <Calendar size={12} />
                         <span>{format(transaction.date, 'dd MMM yyyy HH:mm', { locale: fr })}</span>
@@ -200,7 +209,7 @@ export const PaymentHistory = ({ customerId }: PaymentHistoryProps) => {
                       className="flex items-center gap-1 px-3 py-1 text-blue-600 hover:bg-blue-50 rounded-lg transition"
                     >
                       <Download size={16} />
-                      <span className="text-sm">Reçu</span>
+                      <span className="text-sm">ReÃ§u</span>
                     </button>
                   )}
                 </div>
