@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import { Star, ThumbsUp } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -23,7 +23,7 @@ export const MerchantRating = ({ merchantId: _merchantId, merchantName, onRated 
     // Simulation d'envoi
     setTimeout(() => {
       setSubmitted(true);
-      toast.success('Merci pour votre Ã©valuation !');
+      toast.success('Merci pour votre évaluation !');
       if (onRated) onRated();
     }, 500);
   };
@@ -35,7 +35,7 @@ export const MerchantRating = ({ merchantId: _merchantId, merchantName, onRated 
           <ThumbsUp size={32} className="text-green-600" />
         </div>
         <h3 className="text-xl font-bold text-gray-800 mb-2">Merci !</h3>
-        <p className="text-gray-600">Votre avis a Ã©tÃ© enregistrÃ©</p>
+        <p className="text-gray-600">Votre avis a été enregistré</p>
       </div>
     );
   }
@@ -44,10 +44,10 @@ export const MerchantRating = ({ merchantId: _merchantId, merchantName, onRated 
     <div className="space-y-4">
       <div className="text-center">
         <h3 className="text-lg font-semibold text-gray-800">{merchantName}</h3>
-        <p className="text-sm text-gray-500">Comment Ã©valuez-vous ce commerÃ§ant ?</p>
+        <p className="text-sm text-gray-500">Comment évaluez-vous ce commerçant ?</p>
       </div>
 
-      {/* Ã‰toiles */}
+      {/* Étoiles */}
       <div className="flex justify-center gap-2">
         {[1, 2, 3, 4, 5].map((star) => {
           const isActive = (hoverRating || rating) >= star;
@@ -77,7 +77,7 @@ export const MerchantRating = ({ merchantId: _merchantId, merchantName, onRated 
         <textarea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          placeholder="Partagez votre expÃ©rience..."
+          placeholder="Partagez votre expérience..."
           rows={3}
           className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
         />
@@ -88,7 +88,7 @@ export const MerchantRating = ({ merchantId: _merchantId, merchantName, onRated 
         onClick={handleSubmit}
         className="w-full bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700 transition"
       >
-        Envoyer l'Ã©valuation
+        Envoyer l'évaluation
       </button>
     </div>
   );

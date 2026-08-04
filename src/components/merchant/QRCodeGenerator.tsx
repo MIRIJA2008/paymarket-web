@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import { QRService } from '../../services/qr.service';
 import { Download, Printer, Copy, DollarSign, Package, CreditCard } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -23,7 +23,7 @@ export const QRCodeGenerator = ({ merchantId, merchantName }: QRCodeGeneratorPro
   const [qrCodeUrl, setQrCodeUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  // Produits mockÃ©s
+  // Produits mockés
   const products: Product[] = [
     { id: '1', name: 'Produit A', price: 5000 },
     { id: '2', name: 'Produit B', price: 10000 },
@@ -39,7 +39,7 @@ export const QRCodeGenerator = ({ merchantId, merchantName }: QRCodeGeneratorPro
       switch (qrType) {
         case 'static':
           qrUrl = await QRService.generateStaticQR(merchantId, merchantName);
-          toast.success('QR Code statique gÃ©nÃ©rÃ© avec succÃ¨s');
+          toast.success('QR Code statique généré avec succès');
           break;
           
         case 'dynamic':
@@ -49,12 +49,12 @@ export const QRCodeGenerator = ({ merchantId, merchantName }: QRCodeGeneratorPro
             return;
           }
           qrUrl = await QRService.generateDynamicQR(merchantId, merchantName, parseFloat(amount));
-          toast.success(`QR Code de ${parseFloat(amount).toLocaleString()} Ar gÃ©nÃ©rÃ©`);
+          toast.success(`QR Code de ${parseFloat(amount).toLocaleString()} Ar généré`);
           break;
           
         case 'product':
           if (!selectedProduct) {
-            toast.error('Veuillez sÃ©lectionner un produit');
+            toast.error('Veuillez sélectionner un produit');
             setLoading(false);
             return;
           }
@@ -67,14 +67,14 @@ export const QRCodeGenerator = ({ merchantId, merchantName }: QRCodeGeneratorPro
               product.name, 
               product.price
             );
-            toast.success(`QR Code pour ${product.name} gÃ©nÃ©rÃ©`);
+            toast.success(`QR Code pour ${product.name} généré`);
           }
           break;
       }
       
       setQrCodeUrl(qrUrl);
     } catch (error) {
-      toast.error('Erreur lors de la gÃ©nÃ©ration du QR Code');
+      toast.error('Erreur lors de la génération du QR Code');
       console.error(error);
     } finally {
       setLoading(false);
@@ -84,7 +84,7 @@ export const QRCodeGenerator = ({ merchantId, merchantName }: QRCodeGeneratorPro
   const handleDownload = () => {
     if (qrCodeUrl) {
       QRService.downloadQRCode(qrCodeUrl, `paymarket_qr_${Date.now()}.png`);
-      toast.success('QR Code tÃ©lÃ©chargÃ©');
+      toast.success('QR Code téléchargé');
     }
   };
 
@@ -97,13 +97,13 @@ export const QRCodeGenerator = ({ merchantId, merchantName }: QRCodeGeneratorPro
   const handleCopy = () => {
     if (qrCodeUrl) {
       navigator.clipboard.writeText(qrCodeUrl);
-      toast.success('QR Code copiÃ© dans le presse-papier');
+      toast.success('QR Code copié dans le presse-papier');
     }
   };
 
   return (
     <div className="bg-white rounded-xl shadow-lg p-6">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">GÃ©nÃ©rateur de QR Code</h2>
+      <h2 className="text-2xl font-bold text-gray-800 mb-4">Générateur de QR Code</h2>
       
       {/* Type de QR Code */}
       <div className="mb-6">
@@ -134,7 +134,7 @@ export const QRCodeGenerator = ({ merchantId, merchantName }: QRCodeGeneratorPro
           >
             <DollarSign className="mx-auto mb-1" size={24} />
             <span className="text-sm font-medium">Dynamique</span>
-            <p className="text-xs text-gray-500 mt-1">Avec montant spÃ©cifique</p>
+            <p className="text-xs text-gray-500 mt-1">Avec montant spécifique</p>
           </button>
           
           <button
@@ -147,12 +147,12 @@ export const QRCodeGenerator = ({ merchantId, merchantName }: QRCodeGeneratorPro
           >
             <Package className="mx-auto mb-1" size={24} />
             <span className="text-sm font-medium">Produit</span>
-            <p className="text-xs text-gray-500 mt-1">Pour un produit spÃ©cifique</p>
+            <p className="text-xs text-gray-500 mt-1">Pour un produit spécifique</p>
           </button>
         </div>
       </div>
 
-      {/* Champs spÃ©cifiques */}
+      {/* Champs spécifiques */}
       {qrType === 'dynamic' && (
         <div className="mb-6">
           <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -171,7 +171,7 @@ export const QRCodeGenerator = ({ merchantId, merchantName }: QRCodeGeneratorPro
       {qrType === 'product' && (
         <div className="mb-6">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            SÃ©lectionner un produit
+            Sélectionner un produit
           </label>
           <select
             value={selectedProduct}
@@ -188,13 +188,13 @@ export const QRCodeGenerator = ({ merchantId, merchantName }: QRCodeGeneratorPro
         </div>
       )}
 
-      {/* Bouton gÃ©nÃ©rer */}
+      {/* Bouton générer */}
       <button
         onClick={handleGenerateQR}
         disabled={loading}
         className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition disabled:opacity-50 mb-6"
       >
-        {loading ? 'GÃ©nÃ©ration en cours...' : 'GÃ©nÃ©rer QR Code'}
+        {loading ? 'Génération en cours...' : 'Générer QR Code'}
       </button>
 
       {/* Affichage QR Code */}
@@ -211,7 +211,7 @@ export const QRCodeGenerator = ({ merchantId, merchantName }: QRCodeGeneratorPro
                 className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
               >
                 <Download size={18} />
-                TÃ©lÃ©charger
+                Télécharger
               </button>
               <button
                 onClick={handlePrint}
@@ -239,7 +239,7 @@ export const QRCodeGenerator = ({ merchantId, merchantName }: QRCodeGeneratorPro
   );
 };
 NotificationService.showToast({
-  title: 'QR Code gÃ©nÃ©rÃ©',
-  message: 'PrÃªt Ã  Ãªtre scannÃ© par vos clients',
+  title: 'QR Code généré',
+  message: 'Prêt à être scanné par vos clients',
   type: 'success'
 });

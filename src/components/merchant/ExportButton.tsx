@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import { Download, FileSpreadsheet, FileText, FileCode, Calendar } from 'lucide-react';
 import { ExportService, TransactionData } from '../../services/export.service';
 import toast from 'react-hot-toast';
@@ -36,7 +36,7 @@ export const ExportButton = ({ transactions, merchantName }: ExportButtonProps) 
       const filteredTransactions = filterTransactionsByDate(transactions, dateRange);
       
       if (filteredTransactions.length === 0) {
-        toast.error('Aucune transaction Ã  exporter pour cette pÃ©riode');
+        toast.error('Aucune transaction à exporter pour cette période');
         return;
       }
       
@@ -51,15 +51,15 @@ export const ExportButton = ({ transactions, merchantName }: ExportButtonProps) 
       switch (format) {
         case 'excel':
           ExportService.exportToExcel(filteredTransactions, merchantName);
-          toast.success(`Export Excel rÃ©ussi: ${filteredTransactions.length} transactions`);
+          toast.success(`Export Excel réussi: ${filteredTransactions.length} transactions`);
           break;
         case 'pdf':
           ExportService.exportToPDF(filteredTransactions, merchantName, periodText);
-          toast.success(`Export PDF rÃ©ussi: ${filteredTransactions.length} transactions`);
+          toast.success(`Export PDF réussi: ${filteredTransactions.length} transactions`);
           break;
         case 'csv':
           ExportService.exportToCSV(filteredTransactions, merchantName);
-          toast.success(`Export CSV rÃ©ussi: ${filteredTransactions.length} transactions`);
+          toast.success(`Export CSV réussi: ${filteredTransactions.length} transactions`);
           break;
       }
       
@@ -82,7 +82,7 @@ export const ExportButton = ({ transactions, merchantName }: ExportButtonProps) 
         Exporter
       </button>
       
-      {/* Menu dÃ©roulant */}
+      {/* Menu déroulant */}
       {showMenu && (
         <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-xl z-50">
           <div className="p-2">
@@ -92,7 +92,7 @@ export const ExportButton = ({ transactions, merchantName }: ExportButtonProps) 
               className="w-full flex items-center gap-2 px-4 py-2 text-left text-gray-700 hover:bg-gray-100 rounded-lg transition"
             >
               <Calendar size={16} />
-              PÃ©riode: {
+              Période: {
                 {
                   all: 'Toutes',
                   today: "Aujourd'hui",
@@ -120,13 +120,13 @@ export const ExportButton = ({ transactions, merchantName }: ExportButtonProps) 
                   onClick={() => { setDateRange('week'); setShowDateFilter(false); }}
                   className="w-full px-4 py-1 text-sm text-left hover:bg-gray-100 rounded"
                 >
-                  â€Ž7 derniers jours
+                  ‎7 derniers jours
                 </button>
                 <button
                   onClick={() => { setDateRange('month'); setShowDateFilter(false); }}
                   className="w-full px-4 py-1 text-sm text-left hover:bg-gray-100 rounded"
                 >
-                  â€Ž30 derniers jours
+                  ‎30 derniers jours
                 </button>
               </div>
             )}

@@ -1,4 +1,4 @@
-﻿import { Smartphone, Mail, Monitor } from 'lucide-react';
+import { Smartphone, Mail, Monitor } from 'lucide-react';
 import { NotificationService } from '../../services/notification.service';
 
 export const TestNotificationButton = () => {
@@ -6,7 +6,7 @@ export const TestNotificationButton = () => {
     const granted = await NotificationService.requestDesktopPermission();
     if (granted) {
       NotificationService.showDesktopNotification(
-        'ðŸ§ª Test de notification',
+        '🧪 Test de notification',
         'Si vous voyez ce message, les notifications fonctionnent !',
         '/logo192.png'
       );
@@ -23,7 +23,7 @@ export const TestNotificationButton = () => {
 
   return (
     <div className="bg-white rounded-xl shadow-sm p-6 mb-6">
-      <h3 className="text-lg font-semibold mb-4">ðŸ§ª Test des notifications</h3>
+      <h3 className="text-lg font-semibold mb-4">🧪 Test des notifications</h3>
       <div className="flex flex-wrap gap-3">
         <button
           onClick={testDesktopNotification}
@@ -48,7 +48,7 @@ export const TestNotificationButton = () => {
         </button>
       </div>
       <p className="text-xs text-gray-500 mt-3">
-        ðŸ’¡ Note: Pour les vraies notifications SMS/Email, configurez les API correspondantes
+        💡 Note: Pour les vraies notifications SMS/Email, configurez les API correspondantes
       </p>
     </div>
   );

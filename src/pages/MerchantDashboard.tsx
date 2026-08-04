@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Menu, 
@@ -60,12 +60,12 @@ export const MerchantDashboard = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    toast.success('Déconnexion réussie');
+    toast.success('D�connexion r�ussie');
     navigate('/');
   };
 
   const handleViewReceipt = (transactionId: string) => {
-    toast.success(`Affichage du reçu ${transactionId}`);
+    toast.success(`Affichage du re�u ${transactionId}`);
   };
 
   const handleExportTransactions = () => {
@@ -73,12 +73,12 @@ export const MerchantDashboard = () => {
   };
 
   const handleTestNotification = () => {
-    toast.success('Test notification réussi !');
+    toast.success('Test notification r�ussi !');
   };
 
   const menuItems = [
     { icon: BarChart3, label: 'Tableau de bord', id: 'dashboard' as const },
-    { icon: QrCode, label: 'QR Code Écran', id: 'qrcode' as const },
+    { icon: QrCode, label: 'QR Code �cran', id: 'qrcode' as const },
     { icon: FileText, label: 'Grand Livre / Journal', id: 'history' as const },
     { icon: Settings, label: 'Configuration Passerelle', id: 'settings' as const }
   ];
@@ -108,7 +108,7 @@ export const MerchantDashboard = () => {
           </div>
           
           <div className="flex items-center gap-2">
-            {/* Bouton de notification — déplacé ici, dans le header */}
+            {/* Bouton de notification � d�plac� ici, dans le header */}
             <button
               onClick={handleTestNotification}
               className="p-2 rounded-xl text-slate-400 hover:text-white bg-[#0f0a1a] border border-[#4c1d95]/40 transition-all"
@@ -192,10 +192,10 @@ export const MerchantDashboard = () => {
             </nav>
           </div>
 
-          {/* Section basse : statuts API + déconnexion */}
+          {/* Section basse : statuts API + d�connexion */}
           <div className="border-t border-[#4c1d95]/20 pt-5 mt-auto">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-3 px-2">
-              État des Passerelles
+              �tat des Passerelles
             </span>
             
             <div className="space-y-2">
@@ -239,7 +239,7 @@ export const MerchantDashboard = () => {
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-[#4c1d95]/10 pb-4">
                 <div>
                   <h2 className="text-xl font-black text-white tracking-wide uppercase">Tableau de Bord Analytique</h2>
-                  <p className="text-xs text-slate-400 mt-1">Données synchronisées en temps réel avec la chambre de compensation.</p>
+                  <p className="text-xs text-slate-400 mt-1">Donn�es synchronis�es en temps r�el avec la chambre de compensation.</p>
                 </div>
                 
                 <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
@@ -269,10 +269,10 @@ export const MerchantDashboard = () => {
                   <div>
                     <div className="flex justify-between items-center mb-4">
                       <p className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1">
-                        <TrendingUp size={14} className="text-[#ff6ef7]" /> Courbe de Croissance Volumétrique
+                        <TrendingUp size={14} className="text-[#ff6ef7]" /> Courbe de Croissance Volum�trique
                       </p>
                       <span className="text-[10px] font-mono text-slate-500 items-center gap-1 hidden sm:flex">
-                        <Calendar size={10} /> Dernière mise à jour il y a 2 min
+                        <Calendar size={10} /> Derni�re mise � jour il y a 2 min
                       </span>
                     </div>
                     <div className="bg-[#0f0a1a]/50 p-2 rounded-xl border border-[#4c1d95]/10">
@@ -285,11 +285,11 @@ export const MerchantDashboard = () => {
                   <div className="absolute top-0 right-0 w-24 h-24 bg-[#ec4899]/5 rounded-full blur-xl pointer-events-none" />
                   <div>
                     <p className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1 mb-4">
-                      <Target size={14} className="text-[#8b5cf6]" /> Seuil d'activité du mois
+                      <Target size={14} className="text-[#8b5cf6]" /> Seuil d'activit� du mois
                     </p>
                     <div className="space-y-1.5">
                       <p className="text-3xl font-black text-white font-mono">3,450,000 <span className="text-xs text-slate-400 font-sans">Ar</span></p>
-                      <p className="text-[11px] text-slate-400">Atteint sur un objectif cible fixé à <span className="text-white font-bold">5,000,000 Ar</span></p>
+                      <p className="text-[11px] text-slate-400">Atteint sur un objectif cible fix� � <span className="text-white font-bold">5,000,000 Ar</span></p>
                     </div>
                     
                     <div className="w-full bg-[#0f0a1a] h-2.5 rounded-full mt-6 overflow-hidden border border-[#4c1d95]/30">
@@ -298,7 +298,7 @@ export const MerchantDashboard = () => {
                   </div>
 
                   <div className="mt-6 pt-4 border-t border-[#4c1d95]/20 flex items-center justify-between text-[11px]">
-                    <span className="text-slate-400 font-mono">Taux d'achèvement :</span>
+                    <span className="text-slate-400 font-mono">Taux d'ach�vement :</span>
                     <span className="font-mono text-[#ff6ef7] font-black flex items-center gap-0.5">69% <ArrowUpRight size={12} /></span>
                   </div>
                 </div>
@@ -306,7 +306,7 @@ export const MerchantDashboard = () => {
               
               <div className="bg-[#1a142e]/60 border border-[#4c1d95]/30 rounded-2xl shadow-xl overflow-hidden p-1">
                 <div className="p-4 border-b border-[#4c1d95]/20">
-                  <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Flux d'écritures en direct</p>
+                  <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Flux d'�critures en direct</p>
                 </div>
                 <RecentTransactions
                   transactions={transactions}
@@ -327,7 +327,7 @@ export const MerchantDashboard = () => {
             <div className="bg-[#1a142e]/60 border border-[#4c1d95]/30 rounded-3xl p-6 shadow-xl space-y-4">
               <div>
                 <h2 className="text-lg font-black text-white tracking-wide uppercase">Grand Livre Comptable</h2>
-                <p className="text-xs text-slate-400">Audit de l'intégralité des règlements émis sur vos terminaux de paiement.</p>
+                <p className="text-xs text-slate-400">Audit de l'int�gralit� des r�glements �mis sur vos terminaux de paiement.</p>
               </div>
               <div className="p-1 bg-[#0f0a1a]/30 border border-[#4c1d95]/20 rounded-2xl overflow-hidden">
                 <RecentTransactions transactions={transactions} onViewReceipt={handleViewReceipt} onExport={handleExportTransactions} />
@@ -337,13 +337,13 @@ export const MerchantDashboard = () => {
 
           {activePage === 'settings' && (
             <div className="bg-[#1a142e]/60 border border-[#4c1d95]/30 rounded-3xl p-6 shadow-xl max-w-3xl mx-auto">
-              <h2 className="text-lg font-black text-white tracking-wide uppercase mb-2">Configurations Métier</h2>
-              <p className="text-xs text-slate-400 leading-relaxed mb-6">Ajustez les préférences de routage de vos flux financiers inter-opérateurs et gérez vos clés d'intégration API.</p>
+              <h2 className="text-lg font-black text-white tracking-wide uppercase mb-2">Configurations M�tier</h2>
+              <p className="text-xs text-slate-400 leading-relaxed mb-6">Ajustez les pr�f�rences de routage de vos flux financiers inter-op�rateurs et g�rez vos cl�s d'int�gration API.</p>
               
               <div className="p-4 rounded-2xl bg-[#0f0a1a]/60 border border-[#4c1d95]/20 text-center font-mono text-xs text-slate-500 py-12">
                 <Settings size={28} className="mx-auto text-[#8b5cf6] mb-3 animate-spin [animation-duration:8s]" />
-                Composants SecOps Avancés (v17.4.0) <br />
-                <span className="text-[#ff6ef7] text-[10px] uppercase font-bold tracking-widest mt-2 block">Accès restreint en cours de déploiement</span>
+                Composants SecOps Avanc�s (v17.4.0) <br />
+                <span className="text-[#ff6ef7] text-[10px] uppercase font-bold tracking-widest mt-2 block">Acc�s restreint en cours de d�ploiement</span>
               </div>
             </div>
           )}
