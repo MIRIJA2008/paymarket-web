@@ -1,13 +1,20 @@
 ﻿import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Phone, Lock, ArrowRight, ShieldCheck, ArrowLeft, RefreshCw } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useAuthStore, type UserRole } from '../store/authStore';
 
 export const LoginPage = () => {
   const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState('');
   const [step, setStep] = useState<'phone' | 'otp'>('phone');
   const navigate = useNavigate();
+  const location = useLocation();
+  const login = useAuthStore((state) => state.login);
+
+  // Le rôle voulu est transmis par la HomePage (bouton "Marchand" ou "Client").
+  // Par défaut on considère un accès client.
+  const role: UserRole = (location.state as { role?: UserRole } | null)?.role ?? 'customer';
 
   const handleSendOTP = () => {
     if (!phone || phone.length < 9) {
@@ -23,8 +30,15 @@ export const LoginPage = () => {
       toast.error('Code OTP invalide');
       return;
     }
+
+    login({
+      phone,
+      name: role === 'merchant' ? 'Compte Marchand' : 'Compte Client',
+      role,
+    });
+
     toast.success('Connexion réussie !');
-    navigate('/merchant/dashboard');
+    navigate(role === 'merchant' ? '/merchant/dashboard' : '/customer');
   };
 
   return (
@@ -53,7 +67,7 @@ export const LoginPage = () => {
             PAYMARKET
           </h1>
           <p className="text-slate-400 mt-2 text-xs max-w-xs mx-auto leading-relaxed">
-            {step === 'phone' ? 'Identifiez votre compte marchand pour recevoir vos accès temporaires.' : 'Un code de sécurité à 6 chiffres vous a été transmis.'}
+            {step === 'phone' ? `Identifiez votre compte ${role === 'merchant' ? 'marchand' : 'client'} pour recevoir vos accès temporaires.` : 'Un code de sécurité à 6 chiffres vous a été transmis.'}
           </p>
         </div>
 
