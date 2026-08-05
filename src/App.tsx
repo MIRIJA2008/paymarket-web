@@ -8,6 +8,8 @@ import { CustomerHome } from './pages/CustomerHome';
 import { CustomerHistory } from './pages/CustomerHistory';
 import { CustomerProfile } from './pages/CustomerProfile';
 import { CustomerPayment } from './pages/CustomerPayment';
+import { NotificationsPage } from './pages/NotificationsPage';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 // Initialisation du client de requêtes pour TanStack Query
 const queryClient = new QueryClient({
@@ -30,14 +32,59 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<div className="p-8 text-center font-bold">Inscription (Module en cours de déploiement)</div>} />
             
-            {/* Espace Marchand */}
-            <Route path="/merchant/dashboard" element={<MerchantDashboard />} />
-            
-            {/* Espace Client (Mobile Money) */}
-            <Route path="/customer" element={<CustomerHome />} />
-            <Route path="/customer/scan" element={<CustomerPayment />} />
-            <Route path="/customer/history" element={<CustomerHistory />} />
-            <Route path="/customer/profile" element={<CustomerProfile />} />
+            {/* Espace Marchand (protégé) */}
+            <Route
+              path="/merchant/dashboard"
+              element={
+                <ProtectedRoute role="merchant">
+                  <MerchantDashboard />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Espace Client (Mobile Money) (protégé) */}
+            <Route
+              path="/customer"
+              element={
+                <ProtectedRoute role="customer">
+                  <CustomerHome />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/customer/scan"
+              element={
+                <ProtectedRoute role="customer">
+                  <CustomerPayment />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/customer/history"
+              element={
+                <ProtectedRoute role="customer">
+                  <CustomerHistory />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/customer/profile"
+              element={
+                <ProtectedRoute role="customer">
+                  <CustomerProfile />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Notifications (accessible aux deux rôles, une fois connecté) */}
+            <Route
+              path="/notifications"
+              element={
+                <ProtectedRoute>
+                  <NotificationsPage />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </div>
         

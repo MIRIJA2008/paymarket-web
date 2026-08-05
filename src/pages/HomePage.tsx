@@ -1,18 +1,15 @@
 ﻿import { useNavigate } from 'react-router-dom';
 import { QrCode, Store, User, Shield, ArrowRight, Zap, RefreshCw, Layers, TrendingUp, CheckCircle, HelpCircle } from 'lucide-react';
-import toast from 'react-hot-toast';
 
 export const HomePage = () => {
   const navigate = useNavigate();
 
   const handleMerchantClick = () => {
-    toast.success('Accès au terminal marchand sécurisé');
-    navigate('/merchant/dashboard');
+    navigate('/login', { state: { role: 'merchant' } });
   };
 
   const handleCustomerClick = () => {
-    toast.success('Authentification espace client réussie');
-    navigate('/customer');
+    navigate('/login', { state: { role: 'customer' } });
   };
 
   return (

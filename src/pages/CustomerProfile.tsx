@@ -1,25 +1,36 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, User, Phone, Mail, Shield, Edit2, LogOut, Award, Key, Save, X } from 'lucide-react';
+import { ArrowLeft, User, Phone, Mail, Shield, Edit2, LogOut, Award, Key, Save, X, RefreshCw } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useAuthStore } from '../store/authStore';
 
 export const CustomerProfile = () => {
   const navigate = useNavigate();
+  const { user, updateProfile, logout } = useAuthStore();
   const [isEditing, setIsEditing] = useState(false);
   const [profile, setProfile] = useState({
-    name: 'Jean Rakoto',
-    phone: '034 12 345 67',
-    email: 'jean.rakoto@email.com'
+    name: user?.name ?? 'Client PayMarket',
+    phone: user?.phone ?? '',
+    email: ''
   });
 
   const handleSave = () => {
+    updateProfile({ name: profile.name, phone: profile.phone });
     setIsEditing(false);
     toast.success('Profil mis à jour');
   };
 
   const handleLogout = () => {
+    logout();
     toast.success('Déconnexion réussie');
     navigate('/');
+  };
+
+  // Déconnecte le compte client actuel et renvoie vers le login marchand,
+  // pour permettre de basculer facilement entre les deux espaces.
+  const handleSwitchProfile = () => {
+    logout();
+    navigate('/login', { state: { role: 'merchant' } });
   };
 
   return (
@@ -186,6 +197,13 @@ export const CustomerProfile = () => {
             </button>
           )}
           
+          <button
+            onClick={handleSwitchProfile}
+            className="w-full bg-[#1a142e]/40 hover:bg-[#6366f1]/10 border border-[#6366f1]/20 hover:border-[#6366f1]/40 text-[#8b5cf6] py-3.5 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 group"
+          >
+            <RefreshCw size={16} className="transform group-hover:rotate-180 transition-transform duration-300" /> Changer de profil (Espace Marchand)
+          </button>
+
           <button
             onClick={handleLogout}
             className="w-full bg-[#1a142e]/40 hover:bg-[#ec4899]/5 border border-[#ec4899]/20 hover:border-[#ec4899]/40 text-[#ec4899] py-3.5 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 group"

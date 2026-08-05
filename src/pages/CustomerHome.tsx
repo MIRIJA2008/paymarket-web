@@ -2,10 +2,14 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Scan, History, User, CreditCard, Bell, ArrowRight, Star, Clock, Zap, TrendingUp, Sparkles, Smartphone } from 'lucide-react';
 import { MerchantRating } from '../components/customer/MerchantRating';
+import { useAuthStore } from '../store/authStore';
+import { useNotificationStore } from '../store/notificationStore';
 
 export const CustomerHome = () => {
   const navigate = useNavigate();
   const [showRating, setShowRating] = useState(false);
+  const user = useAuthStore((state) => state.user);
+  const unread = useNotificationStore((state) => state.unreadCount());
   
   const recentTransactions = [
     { id: 1, merchant: 'Boutique Express', amount: 12500, date: "Aujourd'hui", time: '10:30' },
@@ -82,13 +86,20 @@ export const CustomerHome = () => {
             <div>
               <h1 className="text-xs font-semibold tracking-widest text-[#6366f1] uppercase">Tableau de bord</h1>
               <p className="text-2xl font-black tracking-tight text-white mt-0.5 flex items-center gap-2">
-                Jean Rakoto <Sparkles size={18} className="text-[#ff6ef7] animate-pulse" />
+                {user?.name ?? 'Client PayMarket'} <Sparkles size={18} className="text-[#ff6ef7] animate-pulse" />
               </p>
             </div>
-            <button className="relative p-2.5 bg-[#1a142e] rounded-xl border border-[#4c1d95]/40 hover:border-[#ec4899]/60 transition-colors shadow-lg">
+            <button
+              onClick={() => navigate('/notifications')}
+              className="relative p-2.5 bg-[#1a142e] rounded-xl border border-[#4c1d95]/40 hover:border-[#ec4899]/60 transition-colors shadow-lg"
+            >
               <Bell size={20} className="text-slate-300" />
-              <span className="absolute top-2.5 right-2.5 w-2.5 h-2.5 bg-[#ec4899] rounded-full animate-ping"></span>
-              <span className="absolute top-2.5 right-2.5 w-2.5 h-2.5 bg-[#ff6ef7] rounded-full shadow-[0_0_8px_#ff6ef7]"></span>
+              {unread > 0 && (
+                <>
+                  <span className="absolute top-2.5 right-2.5 w-2.5 h-2.5 bg-[#ec4899] rounded-full animate-ping"></span>
+                  <span className="absolute top-2.5 right-2.5 w-2.5 h-2.5 bg-[#ff6ef7] rounded-full shadow-[0_0_8px_#ff6ef7]"></span>
+                </>
+              )}
             </button>
           </div>
           

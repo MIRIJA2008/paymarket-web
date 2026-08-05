@@ -1,6 +1,7 @@
 import React from 'react'; // Requis selon ta configuration TypeScript/Babel
 import toast from 'react-hot-toast';
 import { CheckCircle2, AlertOctagon, Info, AlertTriangle } from 'lucide-react';
+import { useNotificationStore } from '../store/notificationStore';
 
 export interface NotificationData {
   title: string;
@@ -10,8 +11,16 @@ export interface NotificationData {
 }
 
 export class NotificationService {
-  
+
   static showToast(data: NotificationData) {
+    // Toute notification affichée est aussi enregistrée dans le panneau
+    // "Notifications" (cloche), pour qu'on puisse la retrouver plus tard.
+    useNotificationStore.getState().addNotification({
+      title: data.title,
+      message: data.message,
+      type: data.type,
+    });
+
     const duration = data.duration || 4000;
 
     toast.custom((t) => {
