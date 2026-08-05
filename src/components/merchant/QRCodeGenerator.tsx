@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { QRService } from '../../services/qr.service';
 import { Download, Printer, Copy, DollarSign, Package, CreditCard } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { NotificationService } from '../../services/notification.service';
 interface QRCodeGeneratorProps {
   merchantId: string;
   merchantName: string;
@@ -116,7 +115,7 @@ export const QRCodeGenerator = ({ merchantId, merchantName }: QRCodeGeneratorPro
             className={`p-3 rounded-lg border-2 transition ${
               qrType === 'static'
                 ? 'border-green-600 bg-green-50 text-green-600'
-                : 'border-gray-200 hover:border-green-300'
+                : 'border-gray-200 text-gray-500 hover:border-green-300 hover:text-gray-700'
             }`}
           >
             <CreditCard className="mx-auto mb-1" size={24} />
@@ -129,7 +128,7 @@ export const QRCodeGenerator = ({ merchantId, merchantName }: QRCodeGeneratorPro
             className={`p-3 rounded-lg border-2 transition ${
               qrType === 'dynamic'
                 ? 'border-green-600 bg-green-50 text-green-600'
-                : 'border-gray-200 hover:border-green-300'
+                : 'border-gray-200 text-gray-500 hover:border-green-300 hover:text-gray-700'
             }`}
           >
             <DollarSign className="mx-auto mb-1" size={24} />
@@ -142,7 +141,7 @@ export const QRCodeGenerator = ({ merchantId, merchantName }: QRCodeGeneratorPro
             className={`p-3 rounded-lg border-2 transition ${
               qrType === 'product'
                 ? 'border-green-600 bg-green-50 text-green-600'
-                : 'border-gray-200 hover:border-green-300'
+                : 'border-gray-200 text-gray-500 hover:border-green-300 hover:text-gray-700'
             }`}
           >
             <Package className="mx-auto mb-1" size={24} />
@@ -163,7 +162,7 @@ export const QRCodeGenerator = ({ merchantId, merchantName }: QRCodeGeneratorPro
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             placeholder="Ex: 15000"
-            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full p-3 border rounded-lg text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-transparent"
           />
         </div>
       )}
@@ -176,7 +175,7 @@ export const QRCodeGenerator = ({ merchantId, merchantName }: QRCodeGeneratorPro
           <select
             value={selectedProduct}
             onChange={(e) => setSelectedProduct(e.target.value)}
-            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full p-3 border rounded-lg text-gray-800 focus:ring-2 focus:ring-green-500 focus:border-transparent"
           >
             <option value="">Choisir un produit</option>
             {products.map(product => (
@@ -238,8 +237,3 @@ export const QRCodeGenerator = ({ merchantId, merchantName }: QRCodeGeneratorPro
     </div>
   );
 };
-NotificationService.showToast({
-  title: 'QR Code généré',
-  message: 'Prêt à être scanné par vos clients',
-  type: 'success'
-});
